@@ -136,7 +136,8 @@ def generate_audio(tts_text, mode_checkbox_group, sft_dropdown, prompt_text, pro
     return (target_sr, audio_data)
 
 def main():
-    with gr.Blocks() as demo:
+    css = """footer {visibility: hidden}"""
+    with gr.Blocks(title="CosyVoice WebUI", css=css, theme="Kasien/ali_theme_custom") as demo:
         gr.Markdown("### 代码库 [CosyVoice](https://github.com/FunAudioLLM/CosyVoice) 预训练模型 [CosyVoice-300M](https://www.modelscope.cn/models/iic/CosyVoice-300M) [CosyVoice-300M-Instruct](https://www.modelscope.cn/models/iic/CosyVoice-300M-Instruct) [CosyVoice-300M-SFT](https://www.modelscope.cn/models/iic/CosyVoice-300M-SFT)")
         gr.Markdown("#### 请输入需要合成的文本，选择推理模式，并按照提示步骤进行操作")
 
@@ -166,7 +167,7 @@ def main():
                               outputs=[audio_output])
         mode_checkbox_group.change(fn=change_instruction, inputs=[mode_checkbox_group], outputs=[instruction_text])
     demo.queue(max_size=4, default_concurrency_limit=2)
-    demo.launch(server_port=args.port)
+    demo.launch(server_name="0.0.0.0", server_port=args.port)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
