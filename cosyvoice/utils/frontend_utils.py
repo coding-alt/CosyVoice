@@ -32,6 +32,8 @@ def remove_bracket(text):
     text = text.replace('（', '').replace('）', '')
     text = text.replace('【', '').replace('】', '')
     text = text.replace('`', '').replace('`', '')
+    text = text.replace('《', '').replace('》', '')
+    text = text.replace('-', '')
     text = text.replace("——", " ")
     return text
 
